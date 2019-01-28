@@ -23,18 +23,28 @@ $.ajax({
                 }
             }, {}
         );
+        
+        let counter = 0;
 
-        poolContractsCleanup.forEach(function(address) {
-            $.ajax({
-                url: 'http://api.etherscan.io/api?module=account&action=tokentx&address=' + address + '&startblock=0&endblock=999999999&sort=asc&apikey=' + apiKey,
-                type: "GET",
-                success: function (result) {
-                    if (result.status !== '0') {
-                        pools.push(result.result[0].contractAddress);
-                    }
-                }
-            })
-        })
+        getPools(poolContractsCleanup[counter]);
 
+        function getPools() {
+            if (counter < poolContractsCleanup.length) {
+                setInterval(function() {
+                    $.ajax({
+                        url: 'http://api.etherscan.io/api?module=account&action=tokentx&address=' + poolContractsCleanup[counter] + '&startblock=0&endblock=999999999&sort=asc&apikey=' + apiKey,
+                        type: "GET",
+                        success: function (result) {
+                            if (result.status !== '0') {
+                                console.log(result.result[0].contractAddress);
+                            }
+                        }
+                    })
+                    counter++;
+                }, 300);
+            }
+        }
     }
 })
+
+
