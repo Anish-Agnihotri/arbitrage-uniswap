@@ -29,13 +29,12 @@ $.ajax({
                 url: 'http://api.etherscan.io/api?module=account&action=tokentx&address=' + address + '&startblock=0&endblock=999999999&sort=asc&apikey=' + apiKey,
                 type: "GET",
                 success: function (result) {
-                    if (status !== '0') {
+                    if (result.status !== '0') {
                         pools.push(result.result[0].contractAddress);
                     }
                 }
             })
-        });
-        
-        console.log(pools);
+        })
+
     }
 })
