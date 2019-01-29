@@ -1,5 +1,5 @@
 /* Predefined vars */
-let apiKey = 'T2IH6VJHTEYT3VCZKE495BETGNQZC5235Z'; /* Etherscan API */
+let apiKey = ''; /* Etherscan API */
 let uniswapAddr = '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95'; /* Uniswap mainnet contract */
 
 let pools = []; /* Array to hold list of currency pools */
@@ -42,7 +42,7 @@ $.ajax({
 
                                 getPrice(tokenSymbol);
 
-                                $('#attach').append('<p>' + tokenAddress + ' - ' + tokenName + ' - ' + tokenSymbol + ' - ' + tokenPrice + '</p>');
+                                $('#attach').append('<div><span>' + tokenName + '</span><span>(' + tokenSymbol + ')</span><span>' + tokenAddress + '</span><span>' + tokenPrice + '</span></div>');
                             }
                         }
                     })
